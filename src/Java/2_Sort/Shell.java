@@ -1,6 +1,17 @@
-public class Sort{
+public class Shell{
     public static void sort(Comparable[] nums){
-        // Template
+       int n = nums.length;
+       int h = 1;
+       while(h < n/3) h = h*3+1; // 1 4 13 40...
+
+       while(h >= 1){
+           for(int i = 1; i < n; i++){
+               for(int j = i; j > 0 && less(nums[j], nums[j-1]); j-= h){
+                   swap(nums, j, j-1);
+               }
+           }
+           h /= 3;
+       }
     }
 
     public static void main(String[] args){

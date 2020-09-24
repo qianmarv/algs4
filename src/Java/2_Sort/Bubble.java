@@ -1,6 +1,17 @@
-public class Sort{
+public class Bubble {
     public static void sort(Comparable[] nums){
-        // Template
+        int len = nums.length;
+        boolean sorted = false; // Early exit if no swap
+        while(!sorted && len > 0){
+            sorted = true;
+            for(int i = 0; i < len - 1; i++){
+                if(!less(nums[i],nums[i+1])) {
+                    sorted = false;
+                    swap(nums, i, i+1);
+                }
+            }
+            len--;
+        }
     }
 
     public static void main(String[] args){

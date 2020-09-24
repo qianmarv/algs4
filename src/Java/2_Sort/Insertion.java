@@ -1,6 +1,11 @@
-public class Sort{
+public class Insertion{
     public static void sort(Comparable[] nums){
-        // Template
+       int n = nums.length;
+       for(int i = 1; i < n; i++){
+           for(int j = i; j > 0 && less(nums[j], nums[j-1]); j--){
+               swap(nums, j, j-1);
+           }
+       }
     }
 
     public static void main(String[] args){
