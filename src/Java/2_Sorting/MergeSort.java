@@ -1,17 +1,8 @@
 public class MergeSort{
     public static void sort(Comparable[] nums){
         // Template
-        sort(nums, 0, nums.length);
-    }
-
-    private static void sort(Comparable[] nums, int lo, int hi){
-        if(lo <= hi){
-            return;
-        }
-        mi = lo + (hi - lo)/2;
-        sort(nums, lo, mi);
-        sort(nums, mi+1,hi);
-        merge(nums, lo, mi, hi);
+        // sortTopDown(nums, 0, nums.length);
+        sortBottomUp(nums);
     }
 
     private static void merge(Comparable[] nums, int lo, int mi, int hi){
@@ -26,13 +17,37 @@ public class MergeSort{
                 nums[k] = aux[j++];
             }else if(j > hi){
                 nums[k] = aux[i++];
-            }else if(less(aux[i],aux[j]) <= 0){
+            }else if(less(aux[i],aux[j])){
                 nums[k] = aux[i++];
             }else{
                 nums[k] = aux[j++];
             }
         }
     }
+
+    // Top-Down
+    private static void sortTopDown(Comparable[] nums, int lo, int hi){
+        if(lo <= hi){
+            return;
+        }
+        int mi = lo + (hi - lo)/2;
+        sortTopDown(nums, lo, mi);
+        sortTopDown(nums, mi+1,hi);
+        merge(nums, lo, mi, hi);
+    }
+
+    // Bottom-Up
+    private static void sortBottomUp(Comparable[] nums){
+        int len = nums.length;
+        for(int size = 1; size < len; size += size){
+            for(int i = 0; i < len - size; i += size + 1){
+                int hi = i + size;
+                int mi = i + size / 2;
+                merge(nums, i, mi, Math.min(hi, len-1));
+            }
+        }
+    }
+
     public static void main(String[] args){
         String[] a = StdIn.readAllStrings();
         Selection.sort(a);
