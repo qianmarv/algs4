@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.StdIn;
 public class Selection {
     public static void sort(Comparable[] nums){
         int len = nums.length;
